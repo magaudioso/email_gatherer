@@ -9,3 +9,7 @@ Put together by Front Row Venture' Revenue Team to make contact sourcing and sto
 -Git-everyone should make a practice push/commit
 -Download chrome driver (https://sites.google.com/chromium.org/driver/downloads?authuser=0)
    -Input path of where the executable is located; mapped into the correct variable in the python script
+
+
+#Next Goals ---
+---Figure out a way to pump this list of LinkedIn URLs into Apollo or some other email scraping software
