@@ -7,7 +7,6 @@ from time import sleep
 import csv
 from parsel import Selector
 import parameters_real
-import parameters
 import numpy
 ###------------------------------------------------------HELPER FUNCTIONS---------------------------------------------------------------##
 # Function call extracting title and linkedin profile iteratively
@@ -51,8 +50,7 @@ def repeat_fun(times, f):
 
 #--------------------------------------------------------LINKEDIN SCRAPE-----------------------------------------------------#
 # specifies the path to the chromedriver.exe
-driver = webdriver.Chrome(r"C:\chromedriver_win32\chromedriver.exe")
-
+driver = webdriver.Chrome(r"C:\Users\tanis\Downloads\chromedriver_win32\chromedriver.exe")
 
 # driver.get method() will navigate to a page given by the URL address
 driver.get('https://www.linkedin.com')
@@ -61,15 +59,15 @@ driver.get('https://www.linkedin.com')
 username = driver.find_element_by_id('session_key')
 
 # send_keys() to simulate key strokes
-username.send_keys('magaudioso@gmail.com')
-sleep(0.5)
+username.send_keys('user')
+sleep(5)
 
 # locate password form by_class_name
 password = driver.find_element_by_id('session_password')
 
 # send_keys() to simulate key strokes
-password.send_keys('Stanford21')
-sleep(0.5)
+password.send_keys('password')
+sleep(7)
 
 # locate submit button by_class_name
 log_in_button = driver.find_element_by_class_name('sign-in-form__submit-button')
@@ -87,7 +85,8 @@ sleep(3)
 search_query = driver.find_element_by_name('q')
 
 # send_keys() to simulate the search text key strokes
-search_query.send_keys(parameters.search_query)
+search_query.send_keys(parameters_real.search_query)
+sleep(11)
 
 # .send_keys() to simulate the return key 
 search_query.send_keys(Keys.RETURN)
@@ -110,7 +109,7 @@ from itertools import zip_longest
 # Load titles and links data into csv
 d = [titles01, links]
 export_data = zip_longest(*d, fillvalue = '')
-with open(parameters.file_name, 'w', encoding="ISO-8859-1", newline='') as myfile:
+with open(parameters_real.file_name, 'w', encoding="ISO-8859-1", newline='') as myfile:
       wr = csv.writer(myfile)
       wr.writerow(("Titles", "Links", "Current_Job", "Current_Location" ))
       wr.writerows(export_data)
