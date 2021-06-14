@@ -8,6 +8,12 @@ import csv
 from parsel import Selector
 import parameters_real
 import numpy
+from random import seed
+from random import randint
+
+### SET SEED - MAKE SURE YOU SET TO A DIFFERENT NUMBER EVERY TIME YOU RUN THE PROGRAM
+seed(123432)
+
 ###------------------------------------------------------HELPER FUNCTIONS---------------------------------------------------------------##
 # Function call extracting title and linkedin profile iteratively
 def find_profiles():
@@ -60,33 +66,33 @@ username = driver.find_element_by_id('session_key')
 
 # send_keys() to simulate key strokes
 username.send_keys('user')
-sleep(5)
+sleep(randint(5, 15))
 
 # locate password form by_class_name
 password = driver.find_element_by_id('session_password')
 
 # send_keys() to simulate key strokes
 password.send_keys('password')
-sleep(7)
+sleep(randint(5, 15))
 
 # locate submit button by_class_name
 log_in_button = driver.find_element_by_class_name('sign-in-form__submit-button')
 
 # .click() to mimic button click
 log_in_button.click()
-sleep(0.5)
+sleep(randint(0, 2))
 #----------------------------------GOOGLE SCRAPE -------------------------------------------------------------#
 
 # driver.get method() will navigate to a page given by the URL address
 driver.get('https://www.google.com')
-sleep(3)
+sleep(randint(3, 10))
 
 # locate search form by_name
 search_query = driver.find_element_by_name('q')
 
 # send_keys() to simulate the search text key strokes
 search_query.send_keys(parameters_real.search_query)
-sleep(11)
+sleep(randint(5, 15))
 
 # .send_keys() to simulate the return key 
 search_query.send_keys(Keys.RETURN)
@@ -102,8 +108,9 @@ links, titles , descriptions = [], [], []
 repeat_fun(10, profiles_loop)
 print(titles)
 print(links)
+print(descriptions)
 # Separates out just the First/Last Names for the titles variable
-titles01 = [i.split()[0:2] for i in titles]
+titles01 = [i.split()[0:2] for i in titles].reverse()
 # The function below stores scraped data into a .csv file
 from itertools import zip_longest
 # Load titles and links data into csv
